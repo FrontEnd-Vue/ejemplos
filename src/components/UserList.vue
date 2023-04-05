@@ -45,8 +45,17 @@ export default {
   name: "UserList",
   data: function() {
     return {
-      usuarios: UserService.getAllUsers()
+      usuarios: [],
+      errorMessage: ''
     };
+  },
+  created: async function() {
+    try {
+      let response = await UserService.getAllUsers();
+      this.usuarios = response;
+    } catch (error) {
+      this.errorMessage = error;
+    }
   }
 };
 </script>
